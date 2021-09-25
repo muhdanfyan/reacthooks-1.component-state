@@ -1,12 +1,16 @@
 import React, {useState} from "react";
+import useCounter from "./useCounter";
 
 function SubscribeBox(){
 
   const [state, setState] = useState( {
     subscribe: false,
-    like: 0,
+    // like: 0,
     dislike: 0
   })
+
+  const [like, handleLike, handleTripleLike] = useCounter(0)
+  const [dislike, handleDisLike] = useCounter(0)
 
   const handleSubscribe = () => {
     setState({
@@ -15,12 +19,21 @@ function SubscribeBox(){
     })
   }
 
-  const handleLike = () => {
-    setState({
-      ...state,
-      like : state.like + 1
-    })
-  }
+  // tambahan callback currentState
+  // const handleLike = () => {
+  //   setState(currentState => ({
+  //     ...state,
+  //     like : currentState.like + 1
+  //   }))
+  // }
+
+  // share logic di dislike
+
+  // const handleTripleLike = () => {
+  //   handleLike()
+  //   handleLike()
+  //   handleLike()
+  // }
 
   return (
     <div>
@@ -31,15 +44,15 @@ function SubscribeBox(){
       </p>
       <p>
         <button onClick={handleLike}> Like </button>
-        <span>{state.like}</span>
+        <span>{like}</span>
       </p>
       <p>
-        <button> Dislike </button>
-        <span> {state.dislike} </span>
+        <button onClick={handleDisLike}> Dislike </button>
+        <span> {dislike} </span>
       </p>
       <p>
-        <button> Triple Like</button>
-        <span> </span>
+        <button onClick={handleTripleLike}> Triple Like</button>
+        <span> {like} </span>
       </p>
     </div>
   );
