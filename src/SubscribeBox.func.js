@@ -1,42 +1,45 @@
-import React, {useState} from 'react';
-import useCounter from './useCounter'
-// init, read, update
-// share logic
-function SubscribeBox() {
-  const [state, setState] = useState({
+import React, {useState} from "react";
+
+function SubscribeBox(){
+
+  const [state, setState] = useState( {
     subscribe: false,
-  });
-
-  const [like,handleLike, handleTripleLike ] = useCounter(0)
-  const [dislike,handleDislike] = useCounter(0)
-
+    like: 0,
+    dislike: 0
+  })
 
   const handleSubscribe = () => {
     setState({
       ...state,
-      subscribe: !state.subscribe
+      subscribe : !state.subscribe
+    })
+  }
+
+  const handleLike = () => {
+    setState({
+      ...state,
+      like : state.like + 1
     })
   }
 
   return (
     <div>
       <p>
-        <button onClick={handleSubscribe}> 
-          {state.subscribe ? "Subscribe" : "Unsubscribe" } 
+        <button onClick={handleSubscribe}> Subscribe 
         </button>
-        <span> {JSON.stringify(state.subscribe)} </span>
+        <span>{JSON.stringify(state.subscribe)}</span>
       </p>
       <p>
         <button onClick={handleLike}> Like </button>
-        <span> {like} </span>
+        <span>{state.like}</span>
       </p>
       <p>
-        <button onClick={handleDislike}> Dislike </button>
-        <span> {dislike} </span>
+        <button> Dislike </button>
+        <span> {state.dislike} </span>
       </p>
       <p>
-        <button onClick={handleTripleLike}> Triple Like</button>
-        <span> {like}</span>
+        <button> Triple Like</button>
+        <span> </span>
       </p>
     </div>
   );
